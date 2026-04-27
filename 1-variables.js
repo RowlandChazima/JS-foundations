@@ -24,3 +24,5 @@ let milk = 150;
 const milk = 200;
 
 // 3....'var' is the old way of declaring a variable and it is not used that much cause it can bring some errors in your code....
+
+//  var is a way of declaring a variable that can be reassigned later, but it has some issues with scope and hoisting in JavaScript. It is generally recommended to use 'let' and 'const' instead of 'var' for better code readability and maintainability.
