@@ -90,6 +90,24 @@ function validateAirtimePurchase(phoneNumber, amount, balance) {
   if (amount > balance) {
     return `You do not have enough balance`;
   }
+
+  let newBalance = balance - amount;
+  return `Your new balance is ${newBalance}`;
 }
 console.log(validateAirtimePurchase("0715207383", 50, 20));
-console.log(validateAirtimePurchase("0720592674"));
+console.log(validateAirtimePurchase("0720592674", 3000, 5000));
+
+// EXERCISE 8
+/* 4. Parking Fee Calculator
+   A parking system charges based on hours parked. Write a function that:
+   - Takes number of hours parked
+   - Charges:
+     - First 2 hours → KES 50/hour
+     - Additional hours → KES 30/hour
+   - Uses conditionals to calculate total cost */
+
+function ParkingFee(hours) {
+  if (hours <= 2) {
+    return hours * 50;
+  }
+}
