@@ -109,5 +109,8 @@ console.log(validateAirtimePurchase("0720592674", 3000, 5000));
 function ParkingFee(hours) {
   if (hours <= 2) {
     return hours * 50;
+  } else {
+    return hours * 50 + (hours - 2) * 30;
   }
 }
+console.log(ParkingFee(4));
