@@ -114,3 +114,40 @@ function ParkingFee(hours) {
   }
 }
 console.log(ParkingFee(4));
+console.log(ParkingFee(2));
+
+// EXERCISES 9
+/* 3. Supermarket Discount Calculator
+   A supermarket applies discounts based on total purchase. Write a function that:
+   - Takes an array of item prices
+   - Calculates total cost using a loop
+   - Applies:
+     - 10% discount if total > 5000
+     - 5% discount if total > 2000
+   - Returns final payable amount */
+
+function calculateDiscount(prices) {
+  let total = 0;
+  for (let i = 0; i < prices.length; i++) {
+    total += prices[i];
+  }
+  // DISCOUNT
+  let discount = 0;
+
+  if (total > 5000) {
+    discount = 0.1;
+  } else if (total > 2000) {
+    discount = 0.05;
+  }
+
+  const discountAmount = total * discount;
+  const totalAmount = total - discountAmount;
+
+  console.log(discountAmount);
+  console.log(totalAmount);
+
+  return `THE AMOUNT PAYABLE IS ${totalAmount}`;
+}
+
+console.log(calculateDiscount([100, 300, 5000, 300]));
+console.log(calculateDiscount([500, 6000, 300, 50]));
