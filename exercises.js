@@ -151,3 +151,51 @@ function calculateDiscount(prices) {
 
 console.log(calculateDiscount([100, 300, 5000, 300]));
 console.log(calculateDiscount([500, 6000, 300, 50]));
+
+// EXERCISE 10
+/*  2. Student Grade Processing System
+   A school wants to automate grading. Write a function that:
+   - Accepts an array of student scores
+   - Uses a loop to:
+     - Assign grades: 70+ → A, 60–69 → B, 50–59 → C, Below 50 → Fail
+   - Returns a summary:
+     - Total students
+     - Number of passes and fails
+*/
+
+function processingGrades(scores) {
+  let passes = 0;
+  let fails = 0;
+
+  for (let i = 0; i < scores.length; i++) {
+    const score = scores[i];
+    let grade;
+
+    if (score >= 70) {
+      grade = "A";
+    } else if (score >= 60) {
+      grade = "B";
+    } else if (score >= 50) {
+      grade = "C";
+    } else {
+      grade = "Fail";
+    }
+
+    if (grade === "Fail") {
+      fails++;
+    } else {
+      passes++;
+    }
+  }
+
+  console.log(`Student ${i + 1}: Score ${score} Grade ${grade}`);
+
+  return {
+    totalStudents: scores.length,
+    passes: passes,
+    fails: fails,
+  };
+}
+
+const result = processingGrades([85, 40, 90, 70, 20, 30]);
+console.log(result);
