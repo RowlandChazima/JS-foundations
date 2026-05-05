@@ -168,34 +168,42 @@ function processingGrades(scores) {
   let fails = 0;
 
   for (let i = 0; i < scores.length; i++) {
-    const score = scores[i];
-    let grade;
+    const score = scores[i]; //PULLS OUT EACH STUDENTS RESULT IN THE ARRAY
+    let grade; //Empty varialble and its values are declared below
 
+    // GRADE LIMITS : whic checks scores and assigns the grades
     if (score >= 70) {
+      // From 70 + above
       grade = "A";
     } else if (score >= 60) {
+      //From 60-69
       grade = "B";
     } else if (score >= 50) {
+      //From 50-59
       grade = "C";
     } else {
+      // From 50 and below is a fail
       grade = "Fail";
     }
 
+    // CHECKS THE GRADE THAT WAS ASSIGNED ADDS THEM TO THE CATEGORY OF WHETHER IT IS A fail OR A pass
     if (grade === "Fail") {
       fails++;
     } else {
       passes++;
     }
-  }
 
-  console.log(`Student ${i + 1}: Score ${score} Grade ${grade}`);
+    // Prints the result for each student due to the (i+1)
+    console.log(`Student ${i + 1}: Score ${score} Grade ${grade}`);
+  } // for loop closes here
 
   return {
+    //When the loop is done it returns 3 values as our statistics
     totalStudents: scores.length,
     passes: passes,
     fails: fails,
   };
 }
 
-const result = processingGrades([85, 40, 90, 70, 20, 30]);
-console.log(result);
+const result = processingGrades([85, 60, 90, 70, 50, 30]); //Calling the function to process these scores
+console.log(result); //PRINTS OUT OUR RESULT STATISTICS
