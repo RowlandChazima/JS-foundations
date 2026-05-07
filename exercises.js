@@ -164,14 +164,14 @@ console.log(calculateDiscount([500, 6000, 300, 50]));
 */
 
 function processingGrades(scores) {
-  let passes = 0;
-  let fails = 0;
+  let passes = 0; //FOR TRACKING OUR STATS
+  let fails = 0; //FOR TRACKING OUR STATS
 
   for (let i = 0; i < scores.length; i++) {
     const score = scores[i]; //PULLS OUT EACH STUDENTS RESULT IN THE ARRAY
     let grade; //Empty varialble and its values are declared below
 
-    // GRADE LIMITS : whic checks scores and assigns the grades
+    // GRADE LIMITS : which checks scores and assigns the grades
     if (score >= 70) {
       // From 70 + above
       grade = "A";
@@ -207,3 +207,120 @@ function processingGrades(scores) {
 
 const result = processingGrades([85, 60, 90, 70, 50, 30]); //Calling the function to process these scores
 console.log(result); //PRINTS OUT OUR RESULT STATISTICS
+
+/* EXERCISE 11
+1. Ride-Hailing Fare & Acceptance System
+
+You are given:  
+- ride object: distance, baseFare, perKmRate, isPeakTime  
+- driver object: isAvailable, rating
+
+Calculate total fare (apply surge if peak time).  
+Determine if driver should accept the ride only if:  
+- Driver is available  
+- Rating is above a threshold  
+- Distance is within an acceptable range
+ */
+
+//  WE NEED INFORMATION ABOUT THE DRIVER AND THE CUSTOMER(ride)
+const ride = {
+  distance: 12,
+  baseFare: 100,
+  perKmRate: 20,
+  isPeakTime: true,
+};
+
+const driver = {
+  rating: 4.5,
+  isAvailable: true,
+};
+
+// The fare is the base charge. if theres a rush hour,i can charge 50% extra.
+/* fare = baseFare +(distance * perKmRate)
+if theres a peak i multiply the total by 50%(1.5) */
+
+function calculateFare(ride) {
+  let fare = ride.baseFare + ride.distance * ride.perKmRate;
+
+  if (ride.isPeakTime) {
+    fare = fare * 1.5;
+  }
+  return fare;
+  // FUNCTION ends here.
+}
+
+/* The driver should accept if some conditions are met:
+- Driver is available  
+- Rating is good enough maybe lets say above 4.0
+- The trip is not tooo far
+ */
+// The function needs info about the driver and the ride
+function shouldAcceptRide(ride, driver) {
+  const isAvailable = driver.isAvailable;
+  const ratingIsGood = driver.rating >= 4.0;
+  const distanceIsOk = ride.distance <= 30;
+
+  // if all the conditions meet the criteria/conditions above he accepts if not REJECTS
+  if (isAvailable && ratingIsGood && distanceIsOk) {
+    return "Driver has accepted the ride. He is coming in a few🙂";
+  } else {
+    return "Driver has rejected your ride.";
+  }
+  // FUNCTION ends here
+}
+
+// CALLING OUR TWO FUNCTIONS
+const totalFare = calculateFare(ride);
+const decision = shouldAcceptRide(ride, driver);
+
+console.log(`Total fare is ${totalFare}`);
+console.log(decision);
+
+/* EXERCISE 12
+2. Banking Transaction Validator
+
+You are given:  
+- account object: balance, isActive  
+- transaction object: amount, type
+
+Determine if a withdrawal should go through only if:  
+- Account is active  
+- Balance is sufficient  
+- Amount is within a daily limit  
+
+Also update the balance accordingly.
+
+ */
+
+//  WE NEES INFO ABOUT THE ACCOUNT INFO AND THE TRANSACTION THAT THE USER WANTS TO MAKE
+const account = {
+  balance: 35000, //User's current balance
+  isActive: true,
+};
+
+const transaction = {
+  amount: 40000,
+  type: "withdrawal",
+};
+
+function canWithdrawMoney(account, transaction) {
+  /* 
+   IN ORDER TO WITHDRAW MONEY SOME CONDITIONS MUST BE MET
+  - Account is active  
+- Balance is sufficient  
+- Amount is within a daily limit  */
+
+  const accountActive = account.isActive;
+  const hasMoney = account.balance >= transaction.amount;
+  const dailyLimit = transaction.amount <= 40000;
+
+  // if all the conditions are met then:
+  if (accountActive && hasMoney && dailyLimit) {
+    account.balance -= transaction.amount; //To deduct the money
+    return `Withdrawal request accepted ✔. New Balance is KSH ${account.balance}`;
+  } else {
+    // LEARNED NEW THING: i can include a reaon why the request was denied
+    return `Withdrwal request denied 🛑❌. Reason: ${!accountActive ? "Account inactive" : !hasMoney ? "Insufficient Funds" : "Exceeds Daily Limit"}`;
+  }
+  // Function ends here
+}
