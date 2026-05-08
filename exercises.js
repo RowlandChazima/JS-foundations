@@ -294,7 +294,7 @@ Also update the balance accordingly.
 
 //  WE NEES INFO ABOUT THE ACCOUNT INFO AND THE TRANSACTION THAT THE USER WANTS TO MAKE
 const account = {
-  balance: 35000, //User's current balance
+  balance: 50000, //User's current balance
   isActive: true,
 };
 
@@ -306,9 +306,10 @@ const transaction = {
 function canWithdrawMoney(account, transaction) {
   /* 
    IN ORDER TO WITHDRAW MONEY SOME CONDITIONS MUST BE MET
-  - Account is active  
-- Balance is sufficient  
-- Amount is within a daily limit  */
+  - Driver is available  
+  - Rating is good enough maybe lets say above 4.0
+  - The trip is not tooo far
+ */
 
   const accountActive = account.isActive;
   const hasMoney = account.balance >= transaction.amount;
@@ -319,8 +320,25 @@ function canWithdrawMoney(account, transaction) {
     account.balance -= transaction.amount; //To deduct the money
     return `Withdrawal request accepted ✔. New Balance is KSH ${account.balance}`;
   } else {
-    // LEARNED NEW THING: i can include a reaon why the request was denied
+    // LEARNED NEW THING: i can include a reason why the request was denied(***TERNARY OPERATOR***)
     return `Withdrwal request denied 🛑❌. Reason: ${!accountActive ? "Account inactive" : !hasMoney ? "Insufficient Funds" : "Exceeds Daily Limit"}`;
   }
-  // Function ends here
+  // Function ends here.
 }
+
+console.log(canWithdrawMoney(account, transaction));
+
+/* 3. Smart Inventory Management
+
+You are given an array of products, each with:  
+stock, minStockLevel, isDiscontinued
+
+Identify which products need restocking only if:  
+- Stock is below minimum  
+- Product is not discontinued
+ */
+
+
+
+
+
